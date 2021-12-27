@@ -41,12 +41,12 @@ public class GameEnding : MonoBehaviour
         }
         else if (m_IsPlayerCaught)
         {
-            countScene = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene("QuestionScene");
+            //countScene = SceneManager.GetActiveScene().buildIndex;
+            //SceneManager.LoadScene("QuestionScene");
 
-            //ENDLevel(caughtBackgroundImageCanvasGroup, true);
-            //gameIsPaused = !gameIsPaused;
-            //PauseGame();
+            ENDLevel(caughtBackgroundImageCanvasGroup, true);
+            gameIsPaused = !gameIsPaused;
+            PauseGame();
 
         }
     }
