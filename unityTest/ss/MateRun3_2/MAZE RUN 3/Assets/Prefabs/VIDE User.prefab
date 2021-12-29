@@ -76,7 +76,6 @@ GameObject:
   - component: {fileID: 1477288804030795412}
   - component: {fileID: 4957990551586076696}
   - component: {fileID: 8673947242829259880}
-  - component: {fileID: 8673947242829259879}
   m_Layer: 8
   m_Name: VIDE User
   m_TagString: Player
@@ -303,25 +302,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &8673947242829259879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8673947242829259876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 724c581402efcfe4ea820123fa9c998e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerName: VIDE User
-  diagUI: {fileID: 0}
-  questUI: {fileID: 0}
-  blue: {fileID: 2723535895471629476}
-  inTrigger: {fileID: 0}
-  demo_Items: []
-  demo_ItemInventory: []
 --- !u!1001 &541147271039777596
 PrefabInstance:
   m_ObjectHideFlags: 0
