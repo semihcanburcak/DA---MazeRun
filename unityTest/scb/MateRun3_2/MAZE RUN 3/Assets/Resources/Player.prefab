@@ -46,7 +46,8 @@ GameObject:
   - component: {fileID: 8978967849648253392}
   - component: {fileID: 4626864239808165280}
   - component: {fileID: 4626864239808165295}
-  - component: {fileID: 6646771467204077479}
+  - component: {fileID: 8609711135002618699}
+  - component: {fileID: -6561956532373266687}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -289,7 +290,7 @@ MonoBehaviour:
   NPCCharacter: {fileID: 5439851575005245206}
   Name: 
   sentences: []
---- !u!114 &6646771467204077479
+--- !u!114 &8609711135002618699
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -307,10 +308,27 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: -6561956532373266687}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-6561956532373266687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4626864239808165292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &5205000248319652244
 GameObject:
   m_ObjectHideFlags: 0

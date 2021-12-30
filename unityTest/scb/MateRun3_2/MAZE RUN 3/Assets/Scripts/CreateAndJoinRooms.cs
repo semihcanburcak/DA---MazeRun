@@ -24,7 +24,20 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        SceneManager.LoadScene("SchoolSceneDayMazeRun");
+        //SceneManager.LoadScene("SchoolSceneDayMazeRun");
+        PhotonNetwork.LoadLevel(2);
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
 }

@@ -1043,10 +1043,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15739ba291bc5c346ab1a15560a1aecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameField: {fileID: 0}
-  passwordField: {fileID: 0}
+  nameField: {fileID: 1988984707}
+  passwordField: {fileID: 662069459}
   username: 
-  submitButton: {fileID: 0}
+  submitButton: {fileID: 1051305020}
   login: 0
 --- !u!4 &1252709392
 Transform:
