@@ -10,6 +10,7 @@ public class DialogueSystem: MonoBehaviour {
 
     public GameObject dialogueGUI;
     public Transform dialogueBoxGUI;
+    public Transform dialogueBoxGUIQuestion;
 
     public float letterDelay = 0.1f;
     public float letterMultiplier = 0.5f;
@@ -24,6 +25,7 @@ public class DialogueSystem: MonoBehaviour {
     public bool dialogueActive = false;
     public bool dialogueEnded = false;
     public bool outOfRange = true;
+
 
     public AudioClip audioClip;
     AudioSource audioSource;
@@ -112,8 +114,16 @@ public class DialogueSystem: MonoBehaviour {
 
             while (currentCharacterIndex < stringLength)
             {
+
                 dialogueText.text += stringToDisplay[currentCharacterIndex];
                 currentCharacterIndex++;
+
+                string Qeustionmark ="?";
+                bool Question = false;
+                if (stringToDisplay.EndsWith(Qeustionmark) == true)
+                {
+                     Question = true;
+                }
 
                 if (currentCharacterIndex < stringLength)
                 {
@@ -133,6 +143,10 @@ public class DialogueSystem: MonoBehaviour {
                 else
                 {
                     dialogueEnded = false;
+                    if (Question)
+                    {
+                        dialogueBoxGUIQuestion.gameObject.SetActive(true);
+                    }
                     break;
                 }
             }
