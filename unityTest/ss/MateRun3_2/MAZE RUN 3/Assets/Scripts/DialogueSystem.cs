@@ -14,17 +14,21 @@ public class DialogueSystem: MonoBehaviour {
 
     public float letterDelay = 0.1f;
     public float letterMultiplier = 0.5f;
+    private int currentDialogueIndex;
 
     public KeyCode DialogueInput = KeyCode.F;
 
     public string Names;
 
     public string[] dialogueLines;
+    public bool[] dialogueQuestions;
 
     public bool letterIsMultiplied = false;
     public bool dialogueActive = false;
     public bool dialogueEnded = false;
     public bool outOfRange = true;
+
+    public bool IsQuestin = false;
 
 
     public AudioClip audioClip;
@@ -34,12 +38,33 @@ public class DialogueSystem: MonoBehaviour {
     {
         audioSource = GetComponent<AudioSource>();
         dialogueText.text = "";
+
+        Cursor.visible = true;
     }
 
     void Update()
     {
-
+        //Press the space bar to apply no locking to the Cursor
+        //if (Input.GetKey(KeyCode.Space))
+        //    Cursor.lockState = CursorLockMode.None;
+        //currentButtonName1 = ButtonClick.CurrentButtonName;
+        //AnswersPlayer[ButtonClick.CurrentButtonClick] = ButtonClick.CurrentButtonName;
     }
+
+    //void OnGUI()
+    //{
+    //    //Press this button to lock the Cursor
+    //    if (GUI.Button(new Rect(0, 0, 100, 50), "Lock Cursor"))
+    //    {
+    //        Cursor.lockState = CursorLockMode.Locked;
+    //    }
+
+    //    //Press this button to confine the Cursor within the screen
+    //    if (GUI.Button(new Rect(125, 0, 100, 50), "Confine Cursor"))
+    //    {
+    //        Cursor.lockState = CursorLockMode.Confined;
+    //    }
+    //}
 
     public void EnterRangeOfNPC()
     {
@@ -54,7 +79,19 @@ public class DialogueSystem: MonoBehaviour {
     public void NPCName()
     {
         outOfRange = false;
-        dialogueBoxGUI.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        if (dialogueQuestions[currentDialogueIndex])
+        {
+            dialogueBoxGUIQuestion.gameObject.SetActive(true);
+            dialogueBoxGUI.gameObject.SetActive(false);
+
+        }
+        else
+        {
+            dialogueBoxGUI.gameObject.SetActive(true);
+            dialogueBoxGUIQuestion.gameObject.SetActive(false);
+
+        }
         nameText.text = Names;
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -67,13 +104,31 @@ public class DialogueSystem: MonoBehaviour {
         StartDialogue();
     }
 
+    //private bool checkIfQuestion(string dialogue1)
+    //{
+    //    IsQuestin = false;
+    //    if (dialogue1.EndsWith("?") == true)
+    //    {
+    //        IsQuestin = true;
+    //    }
+    //    return IsQuestin;
+    //}
+
+    private void Question1()
+    {
+
+    }
+
+
+
     private IEnumerator StartDialogue()
     {
         if (outOfRange == false)
         {
             int dialogueLength = dialogueLines.Length;
-            int currentDialogueIndex = 0;
+            currentDialogueIndex = 0;
 
+            
             while (currentDialogueIndex < dialogueLength || !letterIsMultiplied)
             {
                 if (!letterIsMultiplied)
@@ -103,6 +158,10 @@ public class DialogueSystem: MonoBehaviour {
         }
     }
 
+
+
+
+
     private IEnumerator DisplayString(string stringToDisplay)
     {
         if (outOfRange == false)
@@ -111,42 +170,39 @@ public class DialogueSystem: MonoBehaviour {
             int currentCharacterIndex = 0;
 
             dialogueText.text = "";
+            IsQuestin = false;
 
             while (currentCharacterIndex < stringLength)
             {
-
                 dialogueText.text += stringToDisplay[currentCharacterIndex];
                 currentCharacterIndex++;
 
-                string Qeustionmark ="?";
-                bool Question = false;
-                if (stringToDisplay.EndsWith(Qeustionmark) == true)
-                {
-                     Question = true;
-                }
+                //if (stringToDisplay.EndsWith("?") == true)
+                //{
+                //    IsQuestin = true;
+                //}
 
                 if (currentCharacterIndex < stringLength)
                 {
                     if (Input.GetKey(DialogueInput))
                     {
                         yield return new WaitForSeconds(letterDelay * letterMultiplier);
-
+                        
                         if (audioClip) audioSource.PlayOneShot(audioClip, 0.5F);
+
                     }
                     else
-                    {
+                    { 
+                    
                         yield return new WaitForSeconds(letterDelay);
 
                         if (audioClip) audioSource.PlayOneShot(audioClip, 0.5F);
+                       
+                       
                     }
                 }
                 else
                 {
-                    dialogueEnded = false;
-                    if (Question)
-                    {
-                        dialogueBoxGUIQuestion.gameObject.SetActive(true);
-                    }
                     break;
                 }
             }
@@ -180,6 +236,7 @@ public class DialogueSystem: MonoBehaviour {
             StopAllCoroutines();
             dialogueGUI.SetActive(false);
             dialogueBoxGUI.gameObject.SetActive(false);
+           
         }
     }
 }

@@ -15,6 +15,7 @@ public class NPC : MonoBehaviour {
 
     [TextArea(5, 10)]
     public string[] sentences;
+    public bool[] IfQuestions;
 
     void Start () {
         dialogueSystem = FindObjectOfType<DialogueSystem>(); //finds our Dialogue System in the game
@@ -35,6 +36,7 @@ public class NPC : MonoBehaviour {
             this.gameObject.GetComponent<NPC>().enabled = true;
             dialogueSystem.Names = Name;
             dialogueSystem.dialogueLines = sentences;
+            dialogueSystem.dialogueQuestions = IfQuestions;
             FindObjectOfType<DialogueSystem>().NPCName();
         }
     }
