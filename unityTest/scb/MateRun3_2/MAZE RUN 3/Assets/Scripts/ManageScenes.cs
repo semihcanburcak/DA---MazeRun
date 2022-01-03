@@ -56,6 +56,15 @@ public class ManageScenes : MonoBehaviour
         SceneManager.LoadScene("Loading_Photon");
     }
 
+    public void SelectCampaignOnline()
+    {
+        SceneManager.LoadScene("SelectOffline_Online");
+    }
+
+    public void Lobby()
+    {
+        SceneManager.LoadScene("Lobby");
+    }
 
     public void ExitGame()
     {

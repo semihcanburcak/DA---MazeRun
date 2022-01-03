@@ -781,7 +781,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2037584989}
         m_TargetAssemblyTypeName: ManageScenes, Assembly-CSharp
-        m_MethodName: SelectLoginRegisterScene
+        m_MethodName: SelectCampaignOnline
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
