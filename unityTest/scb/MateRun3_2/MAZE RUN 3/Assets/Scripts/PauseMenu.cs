@@ -7,8 +7,17 @@ using UnityEngine.InputSystem;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu; //SerializeField, because we want it as private but also it should show up in the editor
+    [SerializeField] GameObject settingsMenu; //SerializeField, because we want it as private but also it should show up in the editor
 
-  
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            settingsMenu.SetActive(false);
+            pauseMenu.SetActive(true);
+        }
+    }
+
     public void Pause()
     {
         InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInDynamicUpdate; //The UI stops working when time is stopped, so you have to change the InputMode
@@ -29,6 +38,18 @@ public class PauseMenu : MonoBehaviour
         InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInFixedUpdate; //back to "normal" InputMode
         Time.timeScale = 1f; //time normal
         SceneManager.LoadScene("Lobby"); //Load Lobby Scene
+    }
+
+    public void Settings()
+    {
+        pauseMenu.SetActive(false);
+        settingsMenu.SetActive(true);
+    }
+
+    public void BackToPause()
+    {
+        settingsMenu.SetActive(false);
+        pauseMenu.SetActive(true);
     }
 
     
