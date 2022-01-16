@@ -8,34 +8,19 @@ public class ButtonClick : MonoBehaviour
 {
     private string currentButtonName = "";
     private int currentButtonClick = 0;
-    private string[] AnswersPlayer = new string[5];
-    private string[] RightAnswers = new string[] { "ButtonA", "ButtonB" };
+    private string[] AnswersPlayer = new string[8];
+    private string[] RightAnswers = new string[] { "ButtonA", "ButtonB", "ButtonC", "ButtonD", "ButtonA", "ButtonB", "ButtonC", "ButtonD" };
     private int RightAnswersPlayer;
     private int FalseAnswersPlayer;
     private bool Answercheck;
     Text txt2;
 
+    //public void SetText(string txt)
+    //{
+    //    Text txt2 = transform.Find("TextA").GetComponent<Text>();
+    //    txt2.text = "hello";
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
-
-
-    public void SetText(string txt)
-    {
-        Text txt2 = transform.Find("TextA").GetComponent<Text>();
-        txt2.text = "hello";
-
-    }
+    //}
 
 
     public void setButtonName(string txt)
@@ -51,7 +36,7 @@ public class ButtonClick : MonoBehaviour
         Answercheck = false;
         if (AnswersPlayer[currentButtonClick] == RightAnswers[currentButtonClick])
         {
-            Button ButtonA1 = GameObject.Find("ButtonA").GetComponent<Button>();
+            Button ButtonA1 = GameObject.Find(currentButtonName).GetComponent<Button>();
             ColorBlock cb = ButtonA1.colors;
             cb.selectedColor = Color.green;
             ButtonA1.colors = cb;

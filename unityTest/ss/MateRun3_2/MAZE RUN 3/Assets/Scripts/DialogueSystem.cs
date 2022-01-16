@@ -11,10 +11,13 @@ public class DialogueSystem: MonoBehaviour {
     public GameObject dialogueGUI;
     public Transform dialogueBoxGUI;
     public Transform dialogueBoxGUIQuestion;
+    public Transform dialogueBoxGUIQuestionButtons;
 
     public float letterDelay = 0.1f;
     public float letterMultiplier = 0.5f;
-    private int currentDialogueIndex;
+    
+
+
 
     public KeyCode DialogueInput = KeyCode.F;
 
@@ -22,6 +25,9 @@ public class DialogueSystem: MonoBehaviour {
 
     public string[] dialogueLines;
     public bool[] dialogueQuestions;
+    public int currentDialogueIndex;
+    private int currentQuestionIndex;
+
 
     public bool letterIsMultiplied = false;
     public bool dialogueActive = false;
@@ -38,7 +44,6 @@ public class DialogueSystem: MonoBehaviour {
     {
         audioSource = GetComponent<AudioSource>();
         dialogueText.text = "";
-
         Cursor.visible = true;
     }
 
@@ -72,7 +77,7 @@ public class DialogueSystem: MonoBehaviour {
         dialogueGUI.SetActive(true);
         if (dialogueActive == true)
         {
-            dialogueGUI.SetActive(false);
+            dialogueGUI.SetActive(false);  //wenn andere Dialog geöffnet ist, dann schließen
         }
     }
 
@@ -80,18 +85,23 @@ public class DialogueSystem: MonoBehaviour {
     {
         outOfRange = false;
         Cursor.lockState = CursorLockMode.None;
-        if (dialogueQuestions[currentDialogueIndex])
-        {
-            dialogueBoxGUIQuestion.gameObject.SetActive(true);
-            dialogueBoxGUI.gameObject.SetActive(false);
+        //if (dialogueQuestions[currentQuestionIndex])
+        //{
+        //    dialogueBoxGUIQuestion.gameObject.SetActive(true);
+        //    //dialogueBoxGUI.gameObject.SetActive(false);
 
-        }
-        else
-        {
-            dialogueBoxGUI.gameObject.SetActive(true);
-            dialogueBoxGUIQuestion.gameObject.SetActive(false);
+        //    //dialogueGUI.SetActive(false);
+        //    //dialogueBoxGUI.gameObject.SetActive(false);
+        //}
+        //else
+        //{
+        //    dialogueBoxGUI.gameObject.SetActive(true);
+        //    dialogueBoxGUIQuestion.gameObject.SetActive(false);
+        //}
 
-        }
+        dialogueGUI.SetActive(false);
+        dialogueBoxGUI.gameObject.SetActive(true);
+
         nameText.text = Names;
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -102,21 +112,7 @@ public class DialogueSystem: MonoBehaviour {
             }
         }
         StartDialogue();
-    }
-
-    //private bool checkIfQuestion(string dialogue1)
-    //{
-    //    IsQuestin = false;
-    //    if (dialogue1.EndsWith("?") == true)
-    //    {
-    //        IsQuestin = true;
-    //    }
-    //    return IsQuestin;
-    //}
-
-    private void Question1()
-    {
-
+        //currentQuestionIndex++;
     }
 
 
@@ -135,7 +131,15 @@ public class DialogueSystem: MonoBehaviour {
                 {
                     letterIsMultiplied = true;
                     StartCoroutine(DisplayString(dialogueLines[currentDialogueIndex++]));
+                    if (dialogueQuestions[currentDialogueIndex-1])
+                    {
+                        dialogueBoxGUIQuestionButtons.gameObject.SetActive(true);
 
+                    }
+                    else
+                    {
+                        dialogueBoxGUIQuestionButtons.gameObject.SetActive(false);
+                    }
                     if (currentDialogueIndex >= dialogueLength)
                     {
                         dialogueEnded = true;
@@ -155,6 +159,7 @@ public class DialogueSystem: MonoBehaviour {
             dialogueEnded = false;
             dialogueActive = false;
             DropDialogue();
+            currentQuestionIndex = 0;
         }
     }
 
@@ -224,6 +229,7 @@ public class DialogueSystem: MonoBehaviour {
     {       
         dialogueGUI.SetActive(false);
         dialogueBoxGUI.gameObject.SetActive(false);
+        dialogueBoxGUIQuestionButtons.gameObject.SetActive(false);
     }
 
     public void OutOfRange()
@@ -236,7 +242,7 @@ public class DialogueSystem: MonoBehaviour {
             StopAllCoroutines();
             dialogueGUI.SetActive(false);
             dialogueBoxGUI.gameObject.SetActive(false);
-           
+            dialogueBoxGUIQuestionButtons.gameObject.SetActive(false);
         }
     }
 }
