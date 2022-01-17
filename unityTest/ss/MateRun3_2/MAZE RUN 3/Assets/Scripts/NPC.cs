@@ -10,6 +10,7 @@ public class NPC : MonoBehaviour {
     public Transform NPCCharacter;
 
     private DialogueSystem dialogueSystem;
+    private int currentQuestionIndex;
 
     public string Name;
 
@@ -31,12 +32,14 @@ public class NPC : MonoBehaviour {
     {
         this.gameObject.GetComponent<NPC>().enabled = true;
         FindObjectOfType<DialogueSystem>().EnterRangeOfNPC();
+        //dialogueSystem.currentDialogueIndex = dialogueindex;
         if ((other.gameObject.tag == "Player") && Input.GetKeyDown(KeyCode.F))
         {
             this.gameObject.GetComponent<NPC>().enabled = true;
             dialogueSystem.Names = Name;
             dialogueSystem.dialogueLines = sentences;
             dialogueSystem.dialogueQuestions = IfQuestions;
+            //dialogueSystem.currentQuestionIndex = currentQuestionIndex;
             FindObjectOfType<DialogueSystem>().NPCName();
         }
     }
