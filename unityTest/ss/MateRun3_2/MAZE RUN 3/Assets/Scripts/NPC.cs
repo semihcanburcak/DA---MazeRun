@@ -7,6 +7,7 @@ using UnityEngine;
 public class NPC : MonoBehaviour {
 
     public Transform ChatBackGround;
+    public Transform ChatBackGroundQuestion;
     public Transform NPCCharacter;
 
     private DialogueSystem dialogueSystem;
@@ -19,13 +20,17 @@ public class NPC : MonoBehaviour {
     public bool[] IfQuestions;
 
     void Start () {
-        dialogueSystem = FindObjectOfType<DialogueSystem>(); //finds our Dialogue System in the game
+        dialogueSystem = FindObjectOfType<DialogueSystem>(); //finds Dialogue System 
     }
 	
 	void Update () {
           Vector3 Pos = Camera.main.WorldToScreenPoint(NPCCharacter.position);
           Pos.y += 175;
           ChatBackGround.position = Pos;
+        Vector3 PosQ = Pos;         //Position of the Qestion Buttons
+        PosQ.y -= 80;
+        PosQ.x += 90;
+        ChatBackGroundQuestion.position = PosQ;
     }
 
     public void OnTriggerStay(Collider other)

@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+
 
 public class BasicRigidBodyPush : MonoBehaviour
 {
@@ -6,9 +8,27 @@ public class BasicRigidBodyPush : MonoBehaviour
 	public bool canPush;
 	[Range(0.5f, 5f)] public float strength = 1.1f;
 
-	private void OnControllerColliderHit(ControllerColliderHit hit)
+	public int maxHealth;
+	public Healthbar healthbar;
+
+	private int curHealth;
+	private double curHealth2;
+
+	private void Start()
+    {
+		curHealth = maxHealth;
+	}
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
 	{
 		if (canPush) PushRigidBodies(hit);
+		
+	}
+	public void TakeDamage(int damage)
+	{
+		curHealth -= damage;
+		//curHealth2 = curHealth* 0.1;
+		healthbar.UpdateHealthbar((float)curHealth / (float)maxHealth);
 	}
 
 	private void PushRigidBodies(ControllerColliderHit hit)

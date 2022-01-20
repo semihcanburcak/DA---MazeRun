@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using UnityEngine.UI;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
+
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
@@ -93,6 +95,8 @@ namespace StarterAssets
 
 		private bool _hasAnimator;
 
+
+
 		private void Awake()
 		{
 			// get a reference to our main camera
@@ -113,6 +117,9 @@ namespace StarterAssets
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+
+		
+
 		}
 
 		private void Update()
@@ -123,6 +130,9 @@ namespace StarterAssets
 			GroundedCheck();
 			Move();
 		}
+
+		
+
 
 		private void LateUpdate()
 		{

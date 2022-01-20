@@ -13,11 +13,10 @@ public class DialogueSystem: MonoBehaviour {
     public Transform dialogueBoxGUIQuestion;
     public Transform dialogueBoxGUIQuestionButtons;
 
+    private ButtonClick ButtonClick;
+
     public float letterDelay = 0.1f;
     public float letterMultiplier = 0.5f;
-    
-
-
 
     public KeyCode DialogueInput = KeyCode.F;
 
@@ -35,7 +34,7 @@ public class DialogueSystem: MonoBehaviour {
     public bool outOfRange = true;
 
     public bool IsQuestin = false;
-
+    private bool test = false;
 
     public AudioClip audioClip;
     AudioSource audioSource;
@@ -43,6 +42,7 @@ public class DialogueSystem: MonoBehaviour {
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        //ButtonClick = GetComponent<ButtonClick>();
         dialogueText.text = "";
         Cursor.visible = true;
     }
@@ -123,7 +123,7 @@ public class DialogueSystem: MonoBehaviour {
         {
             int dialogueLength = dialogueLines.Length;
             currentDialogueIndex = 0;
-
+           
             
             while (currentDialogueIndex < dialogueLength || !letterIsMultiplied)
             {
@@ -134,7 +134,6 @@ public class DialogueSystem: MonoBehaviour {
                     if (dialogueQuestions[currentDialogueIndex-1])
                     {
                         dialogueBoxGUIQuestionButtons.gameObject.SetActive(true);
-
                     }
                     else
                     {
@@ -202,8 +201,6 @@ public class DialogueSystem: MonoBehaviour {
                         yield return new WaitForSeconds(letterDelay);
 
                         if (audioClip) audioSource.PlayOneShot(audioClip, 0.5F);
-                       
-                       
                     }
                 }
                 else
