@@ -11,13 +11,18 @@ public class ButtonClick : MonoBehaviour
     private string[] RightAnswers = new string[] { "ButtonA", "ButtonB", "ButtonC", "ButtonD", "ButtonA", "ButtonB", "ButtonC", "ButtonD" };
     private int RightAnswersPlayer;
     private int FalseAnswersPlayer;
-    private bool Answercheck;
+    private bool Answercheck = false;
+
+    public Transform dialogueBoxGUIQuestionButtons;
 
     public int CurrentButtonClick3;
     public int currentButtonClick;
 
-
+    private DialogueSystem dialogueSystem;
+    ColorBlock cb2;
+    Button ButtonA1;
     Text txt2;
+
 
     //public void SetText(string txt)
     //{
@@ -28,48 +33,67 @@ public class ButtonClick : MonoBehaviour
     void Start()
     {
         currentButtonClick = 0;
+        dialogueSystem = DialogueSystem.FindObjectOfType<DialogueSystem>();
     }
 
-    public void ButtonClickup()
+    public bool Answercheck_()
     {
-        currentButtonClick++;
+        return Answercheck;
     }
 
     public void setButtonName(string txt)
     {
+        Answercheck = false;
         currentButtonName = txt;
         AnswersPlayer[currentButtonClick] = currentButtonName;
-        checkAnswer();
 
-    }
-    public bool checkAnswer()
-    {
         txt2 = GameObject.Find("CheckAns").GetComponent<Text>();
         Answercheck = false;
-        if (AnswersPlayer[currentButtonClick] == RightAnswers[currentButtonClick])
+        if (AnswersPlayer[dialogueSystem.currentQuestionIndex-1] == RightAnswers[dialogueSystem.currentQuestionIndex-1])
         {
-            Button ButtonA1 = GameObject.Find(currentButtonName).GetComponent<Button>();
+            ButtonA1 = GameObject.Find(currentButtonName).GetComponent<Button>();
             ColorBlock cb = ButtonA1.colors;
-            ColorBlock cb2 = cb;
             cb.selectedColor = Color.green;
             ButtonA1.colors = cb;
             RightAnswersPlayer++;
-            Answercheck = true;
             txt2.text = "Correct";
             currentButtonClick = 1;
+            StartCoroutine(ExampleCoroutine());
+
+            dialogueSystem.DialogueBoxButtonSetActiveFalse();
+            Answercheck = true;
         }
         else
         {
+            ButtonA1 = GameObject.Find(currentButtonName).GetComponent<Button>();
+            cb2 = ButtonA1.colors;
+            cb2.selectedColor = Color.red;
+            ButtonA1.colors = cb2;
             FalseAnswersPlayer++;
-            Answercheck = false;
             txt2.text = "False";
 
+            StartCoroutine(ExampleCoroutine());
+
+            dialogueSystem.DialogueBoxButtonSetActiveFalse();
+            Answercheck = true;
         }
         currentButtonClick++;
         CurrentButtonClick3 += 1;
-        return Answercheck;
+        
     }
+
+    IEnumerator ExampleCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+        cb2.selectedColor = Color.grey;
+        ButtonA1.colors = cb2;
+        yield return new WaitForSeconds(5f);
+    }
+
+
 
     //public string CurrentButtonName { get => currentButtonName; set => currentButtonName = value; }
     //public int CurrentButtonClick { get => currentButtonClick; set => currentButtonClick = value; }
+    //public bool Answercheck1 { get => Answercheck; set => Answercheck = value; }
+
 }

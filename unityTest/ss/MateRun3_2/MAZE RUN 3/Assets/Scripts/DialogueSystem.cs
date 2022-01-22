@@ -13,8 +13,6 @@ public class DialogueSystem: MonoBehaviour {
     public Transform dialogueBoxGUIQuestion;
     public Transform dialogueBoxGUIQuestionButtons;
 
-    private ButtonClick ButtonClick;
-
     public float letterDelay = 0.1f;
     public float letterMultiplier = 0.5f;
 
@@ -25,7 +23,7 @@ public class DialogueSystem: MonoBehaviour {
     public string[] dialogueLines;
     public bool[] dialogueQuestions;
     public int currentDialogueIndex;
-    private int currentQuestionIndex;
+    public int currentQuestionIndex;
 
 
     public bool letterIsMultiplied = false;
@@ -35,14 +33,16 @@ public class DialogueSystem: MonoBehaviour {
 
     public bool IsQuestin = false;
     private bool test = false;
+    private bool answerCheck = false;
 
     public AudioClip audioClip;
     AudioSource audioSource;
 
+
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        //ButtonClick = GetComponent<ButtonClick>();
         dialogueText.text = "";
         Cursor.visible = true;
     }
@@ -133,7 +133,19 @@ public class DialogueSystem: MonoBehaviour {
                     StartCoroutine(DisplayString(dialogueLines[currentDialogueIndex++]));
                     if (dialogueQuestions[currentDialogueIndex-1])
                     {
-                        dialogueBoxGUIQuestionButtons.gameObject.SetActive(true);
+                        currentQuestionIndex++;
+                        if(!answerCheck)
+                        {
+                            dialogueBoxGUIQuestionButtons.gameObject.SetActive(true);
+                        }
+                        if (answerCheck)
+                        {
+                            dialogueBoxGUIQuestionButtons.gameObject.SetActive(false);
+                            //NPCName();
+                            break;
+                        }
+                        //dialogueBoxGUIQuestionButtons.gameObject.SetActive(true);
+
                     }
                     else
                     {
@@ -158,7 +170,7 @@ public class DialogueSystem: MonoBehaviour {
             dialogueEnded = false;
             dialogueActive = false;
             DropDialogue();
-            currentQuestionIndex = 0;
+            //currentQuestionIndex = 0;
         }
     }
 
@@ -242,4 +254,14 @@ public class DialogueSystem: MonoBehaviour {
             dialogueBoxGUIQuestionButtons.gameObject.SetActive(false);
         }
     }
+
+    public void DialogueBoxButtonSetActiveFalse()
+    {
+        dialogueBoxGUIQuestionButtons.gameObject.SetActive(false);
+    }
+    public void CheckAnswerCheck(bool answercheck1)
+    {
+        answerCheck = answercheck1;
+    }
+
 }
